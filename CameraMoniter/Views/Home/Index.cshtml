@@ -1,0 +1,30 @@
+﻿@model CameraMoniter.Models.ImageModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <img id="imgMain" src="data:image/jpeg;base64,@Model.Base64Data" />
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(async () => {
+
+            async function UpdateImage() {
+
+                let result = await $.get("/Home/GetImage");
+                console.log(result);
+
+                if (result.newImg || true) {
+                    $("#imgMain").attr("src", `data:image/jpeg;base64,${result.data}`);
+                }
+
+            }
+
+            setInterval(UpdateImage, 1000 / @Model.fps);
+
+        });
+    </script>
+}

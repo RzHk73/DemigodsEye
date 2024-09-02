@@ -1,0 +1,33 @@
+worker_processes 1;
+
+events {
+	worker_connections 256;	
+}
+
+http {
+
+	server {
+                listen 80;
+                location / {
+                        add_header Content-Length $content_length always;
+                        root /usr/share/nginx/html;
+                        index index.html;
+                }
+        }
+
+	server {
+		server_name ips.rzhk.uk;
+
+		location / {
+			proxy_pass http://172.17.0.3:8080;
+		}
+	}
+
+	server {
+		server_name ips.hmquickshifter.com;
+
+		location / {
+			proxy_pass http://172.17.0.3:8080;
+		}
+	}
+}

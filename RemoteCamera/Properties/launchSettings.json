@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RemoteCamera": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
